@@ -82,10 +82,3 @@ public/
   favicon.svg
   assets/Product.png       product photo (see public/assets/README.txt)
 ```
-
-## Assets
-
-UI icons, the logo, and the haptic waveforms are generated as SVG, so the app
-runs with **no binary assets required**. The one optional raster is the product
-photo at `public/assets/Product.png`; if absent, an SVG fallback of the band is
-shown.
