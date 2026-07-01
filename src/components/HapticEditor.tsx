@@ -22,6 +22,8 @@ export function HapticEditor({
   saveLabel,
   initialSettings,
   onSave,
+  onDraftChange,
+  hideSaveBar = false,
 }: {
   eyebrow: string;
   title: string;
@@ -29,11 +31,18 @@ export function HapticEditor({
   saveLabel: string;
   initialSettings: HapticSettings;
   onSave: (settings: HapticSettings) => void;
+  onDraftChange?: (settings: HapticSettings) => void;
+  hideSaveBar?: boolean;
 }) {
   const [draft, setDraft] = useState<HapticSettings>({ ...initialSettings });
   const [testing, setTesting] = useState(false);
 
-  const patch = (p: Partial<HapticSettings>) => setDraft((d) => ({ ...d, ...p }));
+  const patch = (p: Partial<HapticSettings>) =>
+    setDraft((d) => {
+      const next = { ...d, ...p };
+      onDraftChange?.(next);
+      return next;
+    });
   const current = getPattern(draft.pattern);
 
   function handleTest() {
@@ -49,7 +58,7 @@ export function HapticEditor({
       <div className="flex h-full flex-col">
         <TopBar eyebrow={eyebrow} title={title} backTo={backTo} />
 
-        <div className="no-scrollbar flex-1 overflow-y-auto px-5 pb-28">
+        <div className="no-scrollbar flex-1 overflow-y-auto px-5 pb-6">
           <p className="text-[14px] leading-snug text-flow-slate">
             Customise your cueing style to find the vibration pattern that works best for you.
             Tailored cueing helps unlock smoother mobility and supports your everyday movement.
@@ -185,16 +194,17 @@ export function HapticEditor({
           </button>
         </div>
 
-        {/* Sticky save bar */}
-        <div className="absolute inset-x-0 bottom-0 z-20 bg-gradient-to-t from-flow-bg via-flow-bg to-transparent px-5 pb-6 pt-3">
-          <button
-            type="button"
-            onClick={() => onSave(draft)}
-            className="w-full rounded-full bg-flow-primary py-4 text-[16px] font-bold text-white shadow-card active:bg-flow-primaryDark transition"
-          >
-            {saveLabel}
-          </button>
-        </div>
+        {!hideSaveBar && (
+          <div className="absolute inset-x-0 bottom-0 z-20 bg-gradient-to-t from-flow-bg via-flow-bg to-transparent px-5 pb-6 pt-3">
+            <button
+              type="button"
+              onClick={() => onSave(draft)}
+              className="w-full rounded-full bg-flow-primary py-4 text-[16px] font-bold text-white shadow-card active:bg-flow-primaryDark transition"
+            >
+              {saveLabel}
+            </button>
+          </div>
+        )}
       </div>
     </PhoneFrame>
   );

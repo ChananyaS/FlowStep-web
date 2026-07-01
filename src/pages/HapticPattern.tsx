@@ -44,13 +44,23 @@ export default function HapticPattern() {
     }
   };
 
+  const [latestDraft, setLatestDraft] = useState<HapticSettings>(state.haptic);
+
+  function handleSave() {
+    updateHaptic(latestDraft);
+    if (latestDraft.motorIntensity !== undefined) {
+      sendIntensityToBoard(latestDraft.motorIntensity);
+    }
+    navigate("/device");
+  }
+
   return (
     <div className="flex flex-col min-h-screen">
-      
+
       {/* ปุ่มกดเชื่อมต่อบลูทูธ */}
       <div className="p-4 bg-white flex justify-center border-b">
-        <button 
-          onClick={connectBluetooth} 
+        <button
+          onClick={connectBluetooth}
           className={`px-6 py-2 rounded-full text-white font-bold transition-colors ${bleCharacteristic ? 'bg-green-500' : 'bg-blue-600'}`}
         >
           {bleCharacteristic ? "✅ Connected to FlowStep" : "🔗 Connect Bluetooth Device"}
@@ -63,18 +73,20 @@ export default function HapticPattern() {
         backTo="/device"
         saveLabel="Save Changes"
         initialSettings={state.haptic}
-        // กำหนด Type ของ settings ให้ตรงกับที่คุณเขียนไว้
-        onSave={(settings: Partial<HapticSettings>) => {
-          updateHaptic(settings);
-          
-          // ดึงค่า motorIntensity ตัวจริงส่งเข้าบอร์ด ESP32
-          if (settings.motorIntensity !== undefined) {
-             sendIntensityToBoard(settings.motorIntensity);
-          }
-          
-          navigate("/device");
-        }}
+        hideSaveBar
+        onDraftChange={setLatestDraft}
+        onSave={() => {}}
       />
+
+      <div className="px-5 pb-6 pt-3">
+        <button
+          type="button"
+          onClick={handleSave}
+          className="w-full rounded-full bg-flow-primary py-4 text-[16px] font-bold text-white shadow-card active:bg-flow-primaryDark transition"
+        >
+          Save Changes
+        </button>
+      </div>
     </div>
   );
 }

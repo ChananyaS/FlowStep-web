@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PhoneFrame from "../components/PhoneFrame";
 import ProductImage from "../components/ProductImage";
@@ -9,6 +8,7 @@ import {
   ChevronRight,
   ClockIcon,
   ConnectedIcon,
+  FootprintIcon,
   LeafIcon,
   MoonIcon,
   Waveform,
@@ -20,36 +20,6 @@ import type { AlertSettings } from "../types";
 
 /* ---- Local sub-components ---- */
 
-const ROTATING_PHRASES = ["月が綺麗ですね", "七転び八起き", "花より男子"] as const;
-const DISPLAY_MS = 15_000;
-const FADE_MS = 800;
-
-function RotatingQuote() {
-  const [index, setIndex] = useState(0);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const fadeIn = setTimeout(() => setVisible(true), 50);
-    const fadeOut = setTimeout(() => setVisible(false), DISPLAY_MS - FADE_MS);
-    const next = setTimeout(() => setIndex((i) => (i + 1) % ROTATING_PHRASES.length), DISPLAY_MS);
-    return () => {
-      clearTimeout(fadeIn);
-      clearTimeout(fadeOut);
-      clearTimeout(next);
-    };
-  }, [index]);
-
-  return (
-    <div className="flex-1 flex items-center justify-center rounded-3xl bg-white p-3.5 shadow-card">
-      <span
-        className="text-[14px] font-bold text-center leading-snug text-[#234B85]"
-        style={{ opacity: visible ? 1 : 0, transition: `opacity ${FADE_MS}ms ease-in-out` }}
-      >
-        「{ROTATING_PHRASES[index]}」
-      </span>
-    </div>
-  );
-}
 
 function MiniStat({ label, value }: { label: string; value: string }) {
   return (
@@ -158,7 +128,7 @@ export default function Device() {
           {/* Today */}
           <section>
             <h2 className="mb-2 text-[20px] font-extrabold text-flow-ink">Today</h2>
-            <div className="flex gap-3">
+            <div className="grid grid-cols-2 gap-3">
               <div className="flex items-center gap-3 rounded-3xl bg-white p-3.5 shadow-card">
                 <span className="grid h-11 w-11 place-items-center rounded-full text-white">
                   <ClockIcon size={48} />
@@ -171,7 +141,15 @@ export default function Device() {
                   </div>
                 </div>
               </div>
-              <RotatingQuote />
+              <div className="flex items-center gap-3 rounded-3xl bg-white p-3.5 shadow-card">
+                <span className="grid h-11 w-11 place-items-center rounded-full text-white">
+                  <FootprintIcon size={48} />
+                </span>
+                <div>
+                  <div className="text-[12px] font-semibold text-flow-muted">Steps</div>
+                  <div className="text-[20px] font-extrabold text-flow-ink">{state.steps}</div>
+                </div>
+              </div>
             </div>
           </section>
 

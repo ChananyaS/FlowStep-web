@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import PhoneFrame from "../components/PhoneFrame";
-import productLogoImg from "../assets/images/Product-logo.png";
+import productLogoImg from "../assets/images/Product-logo.svg";
 import { useDevice } from "../context/DeviceContext";
 
 /** Launch screen — shows the brand, then routes onward. */

@@ -6,7 +6,7 @@ import {
   QuestionIcon,
   ScanIcon,
 } from "../components/icons";
-import productLogoImg from "../assets/images/Product-logo.png";
+import productLogoImg from "../assets/images/Product-logo.svg";
 
 interface OptionProps {
   icon: React.ReactNode;

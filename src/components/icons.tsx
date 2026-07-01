@@ -1,24 +1,26 @@
 import type { HapticPatternId } from "../types";
 
-import chevronImg from "../assets/icons/glyphs_chevron-bold.png";
-import checkImg from "../assets/icons/icon-park-solid_check-one.png";
-import sleepImg from "../assets/icons/icon-park-solid_sleep.png";
-import batteryImg from "../assets/icons/mingcute_battery-fill.png";
-import questionImg from "../assets/icons/mingcute_question-fill.png";
+import chevronImg from "../assets/icons/glyphs_chevron-bold.svg";
+import checkImg from "../assets/icons/icon-park-solid_check-one.svg";
+import sleepImg from "../assets/icons/icon-park-solid_sleep.svg";
+import batteryImg from "../assets/icons/mingcute_battery-fill.svg";
+import questionImg from "../assets/icons/mingcute_question-fill.svg";
 import playImg from "../assets/icons/mynaui_play-solid.png";
-import plantImg from "../assets/icons/cil_plant.png";
-import connectedImg from "../assets/icons/connected.png";
-import keyboardImg from "../assets/icons/solar_keyboard-outline.png";
-import restartImg from "../assets/icons/solar_restart-circle-bold.png";
-import scanImg from "../assets/icons/tabler_scan.png";
-import clockImg from "../assets/icons/uis_clock.png";
+import plantImg from "../assets/icons/cil_plant.svg";
+import connectedImg from "../assets/icons/connected.svg";
+import keyboardImg from "../assets/icons/solar_keyboard-outline.svg";
+import restartImg from "../assets/icons/solar_restart-circle-bold.svg";
+import scanImg from "../assets/icons/tabler_scan.svg";
+import clockImg from "../assets/icons/uis_clock.svg";
+import footprintImg from "../assets/icons/material-symbols-light_footprint.svg";
+import walkingImg from "../assets/icons/fa7-solid_walking.svg";
 
-import singlePulseImg from "../assets/icons/single-pulse.png";
-import doubleTapImg from "../assets/icons/double-tap.png";
-import escalatingImg from "../assets/icons/escalaing.png";
-import heartbeatImg from "../assets/icons/heartbeat.png";
-import sosImg from "../assets/icons/sos.png";
-import continuousImg from "../assets/icons/continuous.png";
+import singlePulseImg from "../assets/icons/single-pulse.svg";
+import doubleTapImg from "../assets/icons/double-tap.svg";
+import escalatingImg from "../assets/icons/escalating.svg";
+import heartbeatImg from "../assets/icons/heartbeat.svg";
+import sosImg from "../assets/icons/sos.svg";
+import continuousImg from "../assets/icons/continuous.svg";
 
 type IconProps = { size?: number; className?: string };
 
@@ -36,12 +38,26 @@ export function LeafIcon(p: IconProps) { return <Img src={plantImg} {...p} />; }
 export function ConnectedIcon(p: IconProps) { return <Img src={connectedImg} {...p} />; }
 export function PlayIcon(p: IconProps) { return <Img src={playImg} {...p} />; }
 export function RestartIcon(p: IconProps) { return <Img src={restartImg} {...p} />; }
+export function FootprintIcon(p: IconProps) { return <Img src={footprintImg} {...p} />; }
+export function WalkingIcon(p: IconProps) { return <Img src={walkingImg} {...p} />; }
 
 export function CheckIcon({ size = 120, ...p }: IconProps) {
   return <Img src={checkImg} size={size} {...p} />;
 }
 
-export function ChevronRight(p: IconProps) { return <Img src={chevronImg} {...p} />; }
+export function ChevronRight({ size = 24, className }: IconProps) {
+  return (
+    <img
+      src={chevronImg}
+      width={size}
+      height={size}
+      className={className}
+      alt=""
+      draggable={false}
+      style={{ transform: "scaleX(-1)" }}
+    />
+  );
+}
 
 export function ChevronLeft({ size = 24, className }: IconProps) {
   return (
@@ -52,7 +68,7 @@ export function ChevronLeft({ size = 24, className }: IconProps) {
       className={className}
       alt=""
       draggable={false}
-      style={{ transform: "scaleX(-1)" }}
+      style={{ transform: "scaleX(1)" }}
     />
   );
 }

@@ -20,6 +20,7 @@ const DEFAULT_STATE: DeviceState = {
   connected: false,
   deviceId: "FS-001",
   mode: "Sleep",
+  steps: 1248,
   timeWornMinutes: 20,
   updateIntervalMs: 45,
   lastSync: "just now",

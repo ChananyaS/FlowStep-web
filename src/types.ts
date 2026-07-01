@@ -44,6 +44,7 @@ export interface DeviceState {
   connected: boolean;
   deviceId: string; // e.g. "FS-001"
   mode: DeviceMode;
+  steps: number;
   timeWornMinutes: number;
   updateIntervalMs: number;
   lastSync: string;
