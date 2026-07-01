@@ -15,7 +15,9 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "types" : ["web-bluetooth"],
     "noFallthroughCasesInSwitch": true
+   
   },
   "include": ["src", "vite.config.ts"]
 }
